@@ -58,6 +58,7 @@ class App extends React.Component {
    */
 
   componentDidMount() {
+    console.log("componentDidMount!");
     this.initAxios();
     this.initSocketConnection();
     fetchUsers().then((users) =>
@@ -67,7 +68,7 @@ class App extends React.Component {
   }
 
   initSocketConnection() {
-    console.log("SOCKET_URI", SOCKET_URI);
+    console.log("initSocketConnection", SOCKET_URI);
     this.socket = io.connect(SOCKET_URI);
   }
 
@@ -112,6 +113,10 @@ class App extends React.Component {
    * Shows error if client gets disconnected.
    */
   onClientDisconnected() {
+    console.log(
+      "Connection Lost from server please check your connection.",
+      "Error!"
+    );
     NotificationManager.error(
       "Connection Lost from server please check your connection.",
       "Error!"
@@ -125,6 +130,7 @@ class App extends React.Component {
   onReconnection() {
     if (this.state.user) {
       this.socket.emit("sign-in", this.state.user);
+      console.log("Connection Established.", "Reconnected!");
       NotificationManager.success("Connection Established.", "Reconnected!");
     }
   }
@@ -135,6 +141,7 @@ class App extends React.Component {
    */
 
   setupSocketListeners() {
+    console.log("setupSocketListeners");
     this.socket.on("message", this.onMessageRecieved.bind(this));
     this.socket.on("reconnect", this.onReconnection.bind(this));
     this.socket.on("disconnect", this.onClientDisconnected.bind(this));
@@ -172,6 +179,12 @@ class App extends React.Component {
       }
       userChatData[targetIndex].unread++;
     }
+    console.log(
+      "message received : ",
+      message,
+      "formatted message",
+      messageData
+    );
     userChatData[targetIndex].messages.push(messageData);
     this.setState({ userChatData });
   }
@@ -225,7 +238,7 @@ class App extends React.Component {
       },
       from: this.state.user.id,
     };
-    console.log("message", message);
+    console.log("created message", message);
     this.socket.emit("message", message);
   }
 
