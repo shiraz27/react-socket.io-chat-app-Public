@@ -50,22 +50,6 @@ class App extends React.Component {
     errorMessage: "",
   };
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     signInModalShow: false,
-  //     users: [], // Avaiable users for signing-in
-  //     userChatData: [], // this contains users from which signed-in user can chat and its message data.
-  //     user: null, // Signed-In User
-  //     selectedUserIndex: null,
-  //     showChatBox: false, // For small devices only
-  //     showChatList: true, // For small devices only
-  //     error: false,
-  //     errorMessage: "",
-  //     //userData: [], // added by shi, to separate user chat list from user list
-  //   };
-  // }
-
   /**
    *
    * Setups Axios to monitor XHR errors.
