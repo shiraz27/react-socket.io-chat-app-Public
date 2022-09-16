@@ -174,7 +174,7 @@ const App = () => {
               margin: 15,
               fontSize: 24,
               color: 'black',
-              backgroundColor: 'pink',
+              backgroundColor: 'white',
               textAlign: msg?.position,
             }}>
             {msg?.text}
